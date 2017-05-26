@@ -71,7 +71,7 @@ class MessagesTest extends TestCase
     }
 
     /** @test */
-    function it_should_respond_error_if_request_is_not_valid_when_update_message()
+    function it_should_respond_error_if_request_is_not_valid_on_update_message()
     {
         $message = factory(Message::class)->create();
         $response = $this->patch('/api/messages/' . $message->id, array());
@@ -84,7 +84,7 @@ class MessagesTest extends TestCase
     }
 
     /** @test */
-    function it_should_show_error_if_id_message_doesnt_exists_on_update()
+    function it_should_respond_status_404_if_invalid_id_message_doesnt_exists_on_update()
     {
         $text = 'message edited from test';
         $post = ['body' => $text];
@@ -96,4 +96,32 @@ class MessagesTest extends TestCase
                 'message' => true
             ]);
     }
+
+
+    /** @test */
+    function it_should_respond_status_200_on_delete_message()
+    {
+        $message = factory(Message::class)->create();
+        $response = $this->delete('/api/messages/' . $message->id, array());
+        $response
+            ->assertStatus(200)
+            ->assertJson([
+                'status' => true
+            ]);
+    }
+
+    /** @test */
+    function it_should_respond_status_404_if_id_message_doesnt_exists_on_delete_message()
+    {
+        $response = $this->delete('/api/messages/9999999999999999999999');
+        $response
+            ->assertStatus(404)
+            ->assertJson([
+                'status' => true,
+                'message' => true
+            ]);
+    }
+
+
+
 }

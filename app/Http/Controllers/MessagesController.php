@@ -55,6 +55,16 @@ class MessagesController extends Controller
         return response()->json(['status' => 'error', 'message' => 'Not found message'], 404);
     }
 
+    public function destroy($id)
+    {
+        $message = Message::find($id);
+        if($message){
+            $message->delete();
+            return response()->json(['status' => 'ok']);
+        }
+        return response()->json(['status' => 'error', 'message' => 'Not found message'], 404);
+    }
+
     protected function validateError($request)
     {
         $this->validator = \Validator::make($request->all(), ['body' => 'required']);

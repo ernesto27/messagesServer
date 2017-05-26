@@ -20,3 +20,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get('messages', 'MessagesController@index');
 Route::post('messages', 'MessagesController@store');
 Route::patch('messages/{id}', 'MessagesController@update');
+Route::delete('messages/{id}', 'MessagesController@destroy');
