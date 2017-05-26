@@ -21,3 +21,7 @@ Route::get('messages', 'MessagesController@index');
 Route::post('messages', 'MessagesController@store');
 Route::patch('messages/{id}', 'MessagesController@update');
 Route::delete('messages/{id}', 'MessagesController@destroy');
+
+
+Route::get('users', 'UsersController@index');
+Route::post('users', 'UsersController@store');

@@ -12,7 +12,6 @@ class MessagesTest extends TestCase
 {
     use DatabaseMigrations;
 
-
     /** @test */
     function it_should_respond_a_valid_json_of_messages()
     {
