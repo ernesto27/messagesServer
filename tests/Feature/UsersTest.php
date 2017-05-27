@@ -33,7 +33,7 @@ class UsersTest extends TestCase
     {
         $user = factory(\App\User::class)->make();
         $userArray = $user->toArray();
-        $userArray['password'] = 'somepassword';
+        $userArray['password'] = bcrypt('secret');
 
         $response = $this->post('api/users', $userArray);
 
@@ -57,7 +57,40 @@ class UsersTest extends TestCase
             ]);
     }
 
-    
+    /** @test */
+    function it_should_respond_status_200_on_success_login()
+    {
+        $user = factory(\App\User::class)->create([
+            'email' => 'myemail@gmail.com',
+            'password' => bcrypt('secret')
+        ]);
+
+        $response = $this->post('api/users/login', ['email' => 'myemail@gmail.com', 'password' => 'secret']);
+        $response
+            ->assertStatus(200)
+            ->assertExactJson([
+                'status' => 'ok',
+                'message' => 'User logged'
+            ]);
+    }
+
+    /** @test */
+    function it_should_respond_error_on_success_fail()
+    {
+        $user = factory(\App\User::class)->create([
+            'email' => 'myemail@gmail.com',
+            'password' => bcrypt('secret')
+        ]);
+
+        $response = $this->post('api/users/login', ['email' => 'myemail@gmail.com', 'password' => 'failpassword']);
+        $response
+            ->assertStatus(200)
+            ->assertExactJson([
+                'status' => 'error',
+                'message' => 'Invalid credentials'
+            ]);
+    }
+
 
 
 

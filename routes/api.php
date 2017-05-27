@@ -25,3 +25,4 @@ Route::delete('messages/{id}', 'MessagesController@destroy');
 
 Route::get('users', 'UsersController@index');
 Route::post('users', 'UsersController@store');
+Route::post('users/login', 'UsersController@login');

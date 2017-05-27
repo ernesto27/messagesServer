@@ -34,4 +34,19 @@ class UsersController extends Controller
             return response()->json(['status' => 'ok']);
         }
     }
+
+    public function login(Request $request)
+    {
+        $user = User::where('email', $request->input('email'))->first();
+        if($user){
+            if(password_verify($request->input('password'), $user->password)){
+                return response()->json(['status' => 'ok', 'message' => 'User logged']);
+            }
+        }
+
+        return response()->json(['status' => 'error', 'message' => 'Invalid credentials']);
+    }
+
+
+
 }
