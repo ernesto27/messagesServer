@@ -25,7 +25,8 @@ class MessagesController extends Controller
         }
 
         $message = Message::create([
-            'body' => $request->get('body')
+            'body' => $request->get('body'),
+            'user_id' => $request->get('user_id')
         ]);
 
         if($message){

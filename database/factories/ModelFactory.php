@@ -26,6 +26,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
 
 $factory->define(App\Message::class, function (Faker\Generator $faker) {
     return [
-        'body' => $faker->sentence
+        'body' => $faker->sentence,
+        'user_id' => factory('App\User')->create()->id
     ];
 });
