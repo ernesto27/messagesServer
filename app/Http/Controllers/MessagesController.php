@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Message;
+use Auth;
 
 class MessagesController extends Controller
 {
@@ -11,6 +12,7 @@ class MessagesController extends Controller
 
     public function index()
     {
+        //dd(Auth::guard('api')->user());
         return Message::all();
     }
 

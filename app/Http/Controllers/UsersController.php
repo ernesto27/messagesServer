@@ -27,7 +27,8 @@ class UsersController extends Controller
         $user = User::create([
             'name' => $request->get('name'),
             'email' => $request->get('email'),
-            'password' => $request->get('password')
+            'password' => $request->get('password'),
+            'api_token' => str_random(60)
         ]);
 
         if($user){

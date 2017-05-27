@@ -20,13 +20,15 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
+        'api_token' => str_random(60)
     ];
 });
 
 
 $factory->define(App\Message::class, function (Faker\Generator $faker) {
+    $user = factory('App\User')->create();
     return [
         'body' => $faker->sentence,
-        'user_id' => factory('App\User')->create()->id
+        'user_id' => $user->id,
     ];
 });

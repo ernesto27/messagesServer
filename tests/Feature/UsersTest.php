@@ -15,7 +15,7 @@ class UsersTest extends TestCase
     function it_should_respond_a_valid_json_of_users()
     {
         $users = factory(\App\User::class, 4)->create();
-        $response = $this->get('api/users');
+        $response = $this->get('api/users?api_token=' . $users[0]->api_token);
         $response
             ->assertStatus(200)
             ->assertJson([[
