@@ -13,7 +13,7 @@ class MessagesController extends Controller
     public function index()
     {
         //dd(Auth::guard('api')->user());
-        return Message::all();
+        return Message::with('user')->get();
     }
 
     public function store(Request $request)

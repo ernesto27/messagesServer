@@ -19,7 +19,6 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::patch('messages/{id}', 'MessagesController@update');
     Route::delete('messages/{id}', 'MessagesController@destroy');
 
-
     Route::get('users', 'UsersController@index');
 });
 

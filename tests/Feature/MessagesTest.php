@@ -24,7 +24,8 @@ class MessagesTest extends TestCase
                 'id' => true,
                 'body' => true,
                 'created_at' => true,
-                'updated_at' => true
+                'updated_at' => true,
+                'user' => true
             ]]);
     }
 
